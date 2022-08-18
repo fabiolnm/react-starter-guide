@@ -28,11 +28,13 @@ export default function Game() {
     history: [{
       squares: Array(9).fill(null),
     }],
+    stepNumber: 0,
     xIsNext: true,
   })
 
   function handleClick(i) {
-    const { history, xIsNext } = state
+    const { stepNumber, xIsNext } = state
+    const history = state.history.slice(0, stepNumber + 1)
     const current = history.at(-1)
     const squares = current.squares.slice();
     if(squares[i] || calculateWinner(squares) ) return
@@ -40,15 +42,21 @@ export default function Game() {
     squares[i] = xIsNext ? 'X' : 'O'
     setState({
       history: history.concat([{ squares }]),
+      stepNumber: history.length,
       xIsNext: !xIsNext
     })
   }
 
   function jumpTo(stepNumber) {
+    setState((state) => ({
+      ...state,
+      stepNumber,
+      xIsNext: (stepNumber % 2) === 0
+    }))
   }
 
-  const { history, xIsNext } = state
-  const { squares } = history.at(-1)
+  const { history, xIsNext, stepNumber } = state
+  const { squares } = history[stepNumber]
   const winner = calculateWinner(squares)
   let status
   if (winner) {
