@@ -1,10 +1,26 @@
 import Square from './square'
+import { useState } from "react"
 
 export default function Board() {
   const status = 'Next: X'
 
+  const [state, setState] = useState({
+    squares: Array(9).fill(null),
+  })
+
   function renderSquare(i) {
-    return <Square value={i} />
+    return (
+      <Square
+        value={state.squares[i]}
+        onClick={() => handleClick(i)}
+      />
+    )
+  }
+
+  function handleClick(i) {
+    const squares = state.squares.slice()
+    squares[i] = 'X'
+    setState({ squares })
   }
 
   return (
