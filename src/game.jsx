@@ -44,6 +44,9 @@ export default function Game() {
     })
   }
 
+  function jumpTo(stepNumber) {
+  }
+
   const { history, xIsNext } = state
   const { squares } = history.at(-1)
   const winner = calculateWinner(squares)
@@ -64,7 +67,13 @@ export default function Game() {
       </div>
       <div className="game-info">
         <div>{ status }</div>
-        <ol>{/* TODO */}</ol>
+        <ol>{ history.map((step, move) => (
+          <li key={move}>
+            <button onClick={() => jumpTo(move)}>
+              Go to { move ? `move #${move}` : 'game start' }
+            </button>
+          </li>
+        ))}</ol>
       </div>
     </div>
   )
