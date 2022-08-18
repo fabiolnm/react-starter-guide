@@ -2,10 +2,9 @@ import Square from './square'
 import { useState } from "react"
 
 export default function Board() {
-  const status = 'Next: X'
-
   const [state, setState] = useState({
     squares: Array(9).fill(null),
+    xIsNext: true,
   })
 
   function renderSquare(i) {
@@ -19,9 +18,11 @@ export default function Board() {
 
   function handleClick(i) {
     const squares = state.squares.slice()
-    squares[i] = 'X'
-    setState({ squares })
+    squares[i] = state.xIsNext ? 'X' : 'O'
+    setState({ squares, xIsNext: !state.xIsNext })
   }
+
+  const status = 'Next player: ' + (state.xIsNext ? 'X' : 'O')
 
   return (
     <div>
