@@ -40,7 +40,7 @@ export default function Board() {
 
   function handleClick(i) {
     const squares = state.squares.slice()
-    if(squares[i]) return
+    if(squares[i] || calculateWinner(squares) ) return
 
     squares[i] = state.xIsNext ? 'X' : 'O'
     setState({ squares, xIsNext: !state.xIsNext })
