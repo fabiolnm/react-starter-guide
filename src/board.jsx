@@ -3,23 +3,27 @@ import Square from './square'
 export default function Board() {
   const status = 'Next: X'
 
+  function renderSquare(i) {
+    return <Square value={i} />
+  }
+
   return (
     <div>
       <div className="status">{status}</div>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        {renderSquare(0)}
+        {renderSquare(1)}
+        {renderSquare(2)}
       </div>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        {renderSquare(3)}
+        {renderSquare(4)}
+        {renderSquare(5)}
       </div>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        {renderSquare(6)}
+        {renderSquare(7)}
+        {renderSquare(8)}
       </div>
     </div>
   )
